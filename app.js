@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const square = document.createElement('div')
       square.setAttribute('id', i)
       square.style.backgroundImage = ''
+      square.classList.add('divBox')
       grid.appendChild(square)
       squares.push(square)
     }
@@ -57,3 +58,43 @@ document.addEventListener('DOMContentLoaded', () => {
     checkRowForThree()
   }, 100)
 })
+
+
+///
+
+setTimeout(() => {
+  let allDiv = document.querySelectorAll('.divBox');
+  console.log(allDiv);
+  allDiv[0].addEventListener('click', () => {
+    botChoice(allDiv);
+  })
+}, 100)
+
+const candyColors = [
+  'url("images/v1.png")',
+  'url("images/v2.png")',
+  'url("images/v3.png")',
+  'url("images/v4.png")',
+  'url("images/v5.png")'
+]
+
+function botChoice(allDiv) {
+
+  function randomNumber(min, max) {
+    return Math.floor(Math.random() * (max - min) + min);
+  }
+  let randomMat = randomNumber(0, 100);
+  console.log(randomMat);
+  /////
+  if(allDiv[randomMat].style.backgroundImage == ''){
+    allDiv[randomMat].style.backgroundImage = candyColors[0];
+
+  }else{
+    let newMat = randomMat
+    allDiv[newMat].style.backgroundImage = candyColors[0];
+  }
+  
+
+}
+
+
