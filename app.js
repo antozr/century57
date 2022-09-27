@@ -62,22 +62,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /// paramètre pour le bot 
 
-let nbBot = randomNumber(1,5);
-console.log(nbBot+'nombre de bot');
+let nbBot = randomNumber(1,5); // donne le nombre de bots disponnible 
+console.log(nbBot+' nombre de bot');
 let nbBaseBot = 0;
+
+  /// crée deuxgroupe de bot au hassard se bassant sur le nombre défini avant 
+let botCentury57 = randomNumber(0, nbBot);
+let botThomasFiron = nbBot - botCentury57;
+
+console.log('Bot de Century 57: '+botCentury57);
+console.log('Bot de THomas & Firon: '+botThomasFiron);
 
 setTimeout(() => {
   let allDiv = document.querySelectorAll('.divBox');
-  //console.log(allDiv);
   allDiv.forEach(divio => {
-    // divio.classList.add('divBorder');
     divio.addEventListener('click', () => {
       //botChoice(allDiv);
       let nbBaseBot = 0;
        /// crée un nombre de bot en fonction d'un nombre aléatoire 👍
-      while (nbBaseBot != nbBot){
+      // while (nbBaseBot != nbBot){
+      //   nbBaseBot++;
+      //   botChoice(allDiv);
+      // }
+      while (nbBaseBot != botCentury57){
         nbBaseBot++;
-        botChoice(allDiv);
+        botChoice(allDiv, 'divBorderCT');
+      }
+      while (nbBaseBot != botThomasFiron){
+        nbBaseBot++;
+        botChoice(allDiv, 'divBorderTF');
       }
     })
   })
@@ -97,21 +110,21 @@ function randomNumber(min, max) {
 /// crée un choix, ici quand on clique sur une case rajoute au hazard une autre maison, mais ne choisi pas une maison déjà séléctionner 
 
 
-function botChoice(allDiv) {
+function botChoice(allDiv, divBorder) {
 
   let io = 0;
  
   let randomMat = randomNumber(0, 100);
-  /////
+  ///// condition pour le choix de la case, si le background est vide ou pas. 
   if (allDiv[randomMat].style.backgroundImage == '') {
     allDiv[randomMat].style.backgroundImage = candyColors[0];
-    allDiv[randomMat].classList.add('divBorder');
+    allDiv[randomMat].classList.add(divBorder);
 
   } else if (allDiv[randomMat].style.backgroundImage != '') {
     while (allDiv[randomMat].style.backgroundImage == '' || io === 10) {
       let newMat = randomMat
       allDiv[newMat].style.backgroundImage = candyColors[0];
-      allDiv[newMat].classList.add('divBorder');
+      allDiv[newMat].classList.add(divBorder);
       
       io++;
     }

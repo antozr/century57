@@ -15,14 +15,17 @@
 .grid div {
     height: 70px;
     width: 70px;
-    border: 1px solid blue;
+    /*border: 1px solid blue;*/
 }
 
 .grid div:hover{
   opacity: 1;
 }
-.divBorder{
+.divBorderCT{
   border: 3px solid red;
+}
+.divBorderTF{
+  border: 3px solid greenyellow;
 }
 
 h3 {
