@@ -60,15 +60,28 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 
-///
+/// paramètre pour le bot 
+
+let nbBot = randomNumber(1,5);
+console.log(nbBot+'nombre de bot');
+let nbBaseBot = 0;
 
 setTimeout(() => {
   let allDiv = document.querySelectorAll('.divBox');
-  console.log(allDiv);
-  allDiv[0].addEventListener('click', () => {
-    botChoice(allDiv);
+  //console.log(allDiv);
+  allDiv.forEach(divio => {
+    // divio.classList.add('divBorder');
+    divio.addEventListener('click', () => {
+      //botChoice(allDiv);
+      let nbBaseBot = 0;
+       /// crée un nombre de bot en fonction d'un nombre aléatoire 👍
+      while (nbBaseBot != nbBot){
+        nbBaseBot++;
+        botChoice(allDiv);
+      }
+    })
   })
-}, 100)
+}, 100);
 
 const candyColors = [
   'url("images/v1.png")',
@@ -78,23 +91,31 @@ const candyColors = [
   'url("images/v5.png")'
 ]
 
+function randomNumber(min, max) {
+  return Math.floor(Math.random() * (max - min) + min);
+}
+/// crée un choix, ici quand on clique sur une case rajoute au hazard une autre maison, mais ne choisi pas une maison déjà séléctionner 
+
+
 function botChoice(allDiv) {
 
-  function randomNumber(min, max) {
-    return Math.floor(Math.random() * (max - min) + min);
-  }
+  let io = 0;
+ 
   let randomMat = randomNumber(0, 100);
-  console.log(randomMat);
   /////
-  if(allDiv[randomMat].style.backgroundImage == ''){
+  if (allDiv[randomMat].style.backgroundImage == '') {
     allDiv[randomMat].style.backgroundImage = candyColors[0];
+    allDiv[randomMat].classList.add('divBorder');
 
-  }else{
-    let newMat = randomMat
-    allDiv[newMat].style.backgroundImage = candyColors[0];
+  } else if (allDiv[randomMat].style.backgroundImage != '') {
+    while (allDiv[randomMat].style.backgroundImage == '' || io === 10) {
+      let newMat = randomMat
+      allDiv[newMat].style.backgroundImage = candyColors[0];
+      allDiv[newMat].classList.add('divBorder');
+      
+      io++;
+    }
   }
-  
-
 }
 
 
