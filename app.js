@@ -62,38 +62,62 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /// paramètre pour le bot 
 
-let nbBot = randomNumber(1,5); // donne le nombre de bots disponnible 
-console.log(nbBot+' nombre de bot');
+function randomNumber(min, max) {
+  return Math.floor(Math.random() * (max - min) + min);
+}
+//choixClanUtilisateur ();
+var nbBot = randomNumber(1, 5); // donne le nombre de bots disponnible 
+console.log(nbBot + ' nombre de bot');
 let nbBaseBot = 0;
 
-  /// crée deuxgroupe de bot au hassard se bassant sur le nombre défini avant 
-let botCentury57 = randomNumber(0, nbBot);
-let botThomasFiron = nbBot - botCentury57;
+/// crée deuxgroupe de bot au hassard se bassant sur le nombre défini avant 
+function century57BotSize() {
+  var botCentury57 = randomNumber(1, nbBot);
+  console.log('Bot de Century 57: ' + botCentury57);
+  return botCentury57;
 
-console.log('Bot de Century 57: '+botCentury57);
-console.log('Bot de THomas & Firon: '+botThomasFiron);
+}
+function thomasBotSiez() {
+  let botThomasFiron = nbBot - century57BotSize();
+  console.log('Bot de THomas & Firon: ' + botThomasFiron);
+  return botThomasFiron;
+}
 
 setTimeout(() => {
+  
+
+  ////
+
   let allDiv = document.querySelectorAll('.divBox');
+
   allDiv.forEach(divio => {
+    //divio.style.backgroundColor = "red";
     divio.addEventListener('click', () => {
+      let io = 0;
+      let io2 = 0;
       //botChoice(allDiv);
       let nbBaseBot = 0;
-       /// crée un nombre de bot en fonction d'un nombre aléatoire 👍
+      let nbBaseBot2 = 0;
+      /// crée un nombre de bot en fonction d'un nombre aléatoire 👍
       // while (nbBaseBot != nbBot){
       //   nbBaseBot++;
       //   botChoice(allDiv);
       // }
-      while (nbBaseBot != botCentury57){
+      while (nbBaseBot != century57BotSize() ||io === 10 ) {
+        io++;
         nbBaseBot++;
-        botChoice(allDiv, 'divBorderCT');
+        botChoice(allDiv, 'divBorderCT');// bug mettre des if 
       }
-      while (nbBaseBot != botThomasFiron){
-        nbBaseBot++;
+      while (nbBaseBot2 != thomasBotSiez() ||io2 === 10 ) {
+        io2++;
+        console.log(io2);
+        nbBaseBot2++;
         botChoice(allDiv, 'divBorderTF');
       }
     })
-  })
+  });
+
+  
 }, 100);
 
 const candyColors = [
@@ -104,16 +128,14 @@ const candyColors = [
   'url("images/v5.png")'
 ]
 
-function randomNumber(min, max) {
-  return Math.floor(Math.random() * (max - min) + min);
-}
+
 /// crée un choix, ici quand on clique sur une case rajoute au hazard une autre maison, mais ne choisi pas une maison déjà séléctionner 
 
 
 function botChoice(allDiv, divBorder) {
 
   let io = 0;
- 
+
   let randomMat = randomNumber(0, 100);
   ///// condition pour le choix de la case, si le background est vide ou pas. 
   if (allDiv[randomMat].style.backgroundImage == '') {
@@ -125,10 +147,25 @@ function botChoice(allDiv, divBorder) {
       let newMat = randomMat
       allDiv[newMat].style.backgroundImage = candyColors[0];
       allDiv[newMat].classList.add(divBorder);
-      
+
       io++;
     }
   }
 }
 
 
+// function scoreAgence() {
+//   // initialisation des score des clans
+//   let score = 0;
+
+//   let scoreCentury = document.querySelector('#scoreC57').innerHTML = score;
+//   let scoreThomasF = document.querySelector('#scoreTF').innerHTML = score;
+// }
+
+
+/// choix du clan de l'utilisateur
+
+// function choixClanUtilisateur() {
+//   let choiceUser = prompt('ENtre ton clan :');
+//   console.log(choiceUser);
+// }
